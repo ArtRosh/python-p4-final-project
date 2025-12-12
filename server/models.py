@@ -1,4 +1,5 @@
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from config import db
 
@@ -11,7 +12,7 @@ class Instructor(db.Model, SerializerMixin):
     email = db.Column(db.String)
 
 
-# --- belongs to Instructor, has many Lessons, has many Enrollments ---
+# --- belongs to Instructor, has many Lessons, has many Enrollments  ---
 class Course(db.Model, SerializerMixin):
     __tablename__ = 'courses'
 
@@ -25,6 +26,7 @@ class Course(db.Model, SerializerMixin):
         nullable=False
     )
 
+    
 
 # --- belongs to Course ---
 class Lesson(db.Model, SerializerMixin):
@@ -40,6 +42,7 @@ class Lesson(db.Model, SerializerMixin):
         nullable=False
     )
 
+   
 
 # --- has many Enrollments ---
 class Student(db.Model, SerializerMixin):
@@ -49,8 +52,9 @@ class Student(db.Model, SerializerMixin):
     name = db.Column(db.String)
     email = db.Column(db.String)
 
+   
 
-# --- belongs to Course and belongs to Student ---
+# --- belongs to Course and Student
 class Enrollment(db.Model, SerializerMixin):
     __tablename__ = 'enrollments'
 
@@ -70,3 +74,5 @@ class Enrollment(db.Model, SerializerMixin):
 
     progress = db.Column(db.Integer)
     status = db.Column(db.String)
+
+    
